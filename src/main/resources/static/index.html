@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>seller products</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div id="response"></div>
+<pre>
+    <div id="product">
+        Result <p id="pnm"> </p>
+    </div>
+</pre>
+
+
+    <button onclick="callREST('start-shopping')" type="submit">Start Shoping</button>
+    <button onclick="callREST('add-product-to-cart/1')" type="submit">Add Product 1</button>
+    <button onclick="callREST('add-product-to-cart/2')" type="submit">Add Product 2</button>
+    <button onclick="callREST('add-product-to-cart/3')" type="submit">Add Product 3</button>
+    <button onclick="callREST('add-product-to-cart/4')" type="submit">Add Product 4</button>
+    <button onclick="callREST('end-shopping')" type="submit">End Shoping</button>
+
+</body>
+
+
+<script>
+        function callREST(url) {
+            var xhttp = new XMLHttpRequest();
+
+            xhttp.open("GET", "http://localhost:8080/" + url, true);
+            xhttp.send();
+
+             xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var myJsonObject = JSON.parse(this.response)
+                    document.getElementById("pnm").innerHTML = JSON.stringify(myJsonObject, null, 4);;
+
+
+                }
+            };
+        }
+</script>
+</html>
