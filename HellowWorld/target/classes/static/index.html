@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>seller products</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div id="response"></div>
+<pre>
+    <div id="product">
+        Product Name <p id="pnm"> </p>
+        Product Id <p id="pid"> </p>
+        Product Brands <p id="pbd"> </p>
+        Product Price <p id="pprc"> </p>
+        Product Category <p id="pcat"> </p>
+    </div>
+</pre>
+
+
+    <button onclick="callREST('products')" type="submit">Get All Products</button>
+    products
+</body>
+
+
+<script>
+        function callREST(url) {
+            var xhttp = new XMLHttpRequest();
+
+            xhttp.open("GET", "http://localhost:8080/" + url, true);
+            xhttp.send();
+
+             xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var myJsonObject = JSON.parse(this.response)
+                    document.getElementById("pnm").innerHTML = JSON.stringify(myJsonObject, null, 4);;
+
+
+                }
+            };
+        }
+</script>
+</html>
